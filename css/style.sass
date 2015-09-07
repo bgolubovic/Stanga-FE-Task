@@ -1,0 +1,732 @@
+/* SASS Document */
+
+/*
+  Version: 1.0
+  Author: Bojan Golubovic
+  Website: http://www.golubovicbojan.com/
+
+
+/* ------------------------------------------ */
+/*             TABLE OF CONTENTS
+/* ------------------------------------------ */
+/*   01 - Normalize CSS            */
+/*   02 - Fonts                    */
+/*   03 - Variables                */
+/*   04 - Mixins                   */
+/*   05 - General & Basic Styles   */
+/*   06 - Header & Navigation      */
+/*   07 - Main section             */
+/*   08 - Footer                   */
+/*   09 - Responsive               */
+
+
+//  01 - Normalize CSS
+@import normalize 
+
+//  02 - Fonts
+$font-gotham_rl: GothamRoundedLight
+$font-arial: Arial
+@font-face
+  font-family: $font-gotham_rl
+  src: url(../fonts/gothamrnd-light.woff) format("woff"), url(../fonts/Gotham-Rounded-Light_21020.ttf) format("truetype")
+
+//Font Awesome
+@import ../fonts/font awesome/scss/font-awesome
+  
+//  03 - Variables
+
+// Background Colors
+$background-color: #cacaca
+$top-bar-color: #f0ee80
+$header-color: #e1e1e1
+$nav-color: #454545
+$nav-dropdown-color: #eeea87
+$footer-color-top: #dad685
+$footer-color-bottom: #efec91
+$footer-bottom-color: #616161
+$news: #f0ee80
+
+// Font colors
+$font-color: #454545
+$top-nav: #7c7c7d
+$main-nav: #cacacb
+$main-nav-hover: #eeea87
+$main-nav-dropdown: #454545
+$page-title: #597664
+$page-title-p: #717174
+$article: #4e4f52
+$footer-link: #656567
+
+
+//  04 - Mixins
+
+// Background Gradined Mixin (top to bottom)
+=bg-gradient-t2b($start-colour, $end-colour)
+  background-color: $start-colour
+  background-image: -webkit-gradient(linear, left top, left bottom, from($start-colour), to($end-colour))
+  background-image: -webkit-linear-gradient(top, $start-colour, $end-colour)
+  background-image: -moz-linear-gradient(top, $start-colour, $end-colour)
+  background-image: -ms-linear-gradient(top, $start-colour, $end-colour)
+  background-image: -o-linear-gradient(top, $start-colour, $end-colour)
+  background-image: linear-gradient(top, $start-colour, $end-colour)
+  filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='#{$start-colour}', end-colourStr='#{$end-colour}')
+
+// Border radius
+=border-radius($radius)
+  border-radius: $radius
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  -o-border-radius: $radius
+
+
+//  05 - General & Basic Styles
+
+body
+  font-family: GothamRoundedLight, sans-serif
+  color: $font-color
+  font-weight: 100
+
+h1
+  font-size: 25px  
+  color: #454545
+  font-weight: 100
+
+.container, .products
+  margin: 0 auto
+  width: 950px     
+
+.row
+  margin-left: 15px
+  margin-right: 15px   
+
+.row::before, .row::after
+  content: ""
+  display: table
+  line-height: 0   
+
+a
+  text-decoration: none  
+
+
+//  06 - Header & Navigation
+
+header
+  +bg-gradient-t2b($header-color, #fff)
+  width: 100%
+  height: 300px
+  position: relative
+
+// Logo
+.logo
+  float: left
+  margin-top: 15px
+
+  h1
+    margin-bottom: 0
+
+  p
+    font-size: 10px
+    margin-top: 6px
+
+// Top Navigation
+.top-nav, .footer-nav
+  float: right
+
+  ul
+    display: table
+    margin-bottom: 0
+
+  li
+    float: left
+    display: inline
+    position: relative
+    margin-right: 15px
+
+  a
+    font-size: 11px
+    font-family: $font-arial
+    color: $top-nav
+
+  a:hover
+    color: $nav-color  
+  
+  img
+    position: relative
+    top: 2px
+
+// Main navigation
+nav
+  width: 96%
+  float: left  
+  background-color: $nav-color  
+  +border-radius(15px 15px 0px 15px)
+  margin-top: 10px
+  margin-left: 14px
+  position: relative
+  z-index: 999
+
+  > ul
+    margin: 0
+    padding: 0
+    position: relative
+    z-index: 9
+    transition: height 1s
+
+    > li
+      float: left
+      display: inline
+      margin: 0
+      padding: 0
+
+      a
+        font-size: 12px
+        color: $main-nav
+        padding: 25px 20px
+        display: block
+
+      a:hover
+        color: $main-nav-hover
+
+    ul
+      display: none
+      visibility: hidden
+
+      a
+        padding: 10px
+
+      a
+        font-size: 11px 
+        color: $main-nav-dropdown
+
+      a:hover
+        color: $main-nav-dropdown
+        text-shadow: 2px 2px $main-nav     
+
+  p
+    color: $main-nav
+    font-size: 12px
+    float: right
+    margin-top: 25px
+    margin-right: 25px
+
+    img
+      position: relative
+      top: 5px
+
+  li:hover ul 
+    display: inline
+    position: absolute
+    visibility: visible
+    left: 0
+    width: 100%
+    top: 54px
+    padding: 0
+    background-color: $nav-dropdown-color
+    +border-radius(0px 0px 15px 15px)
+    box-shadow: 2px 3px 2px $main-nav
+    z-index: 3
+
+    > li
+      float: left
+      display: inline
+      margin: 0
+      padding: 0
+
+      a
+        padding: 10px 20px
+
+.toggle
+  width: 100%
+  display: none !important
+  cursor: pointer
+  float: left
+  display: inline
+  color: $main-nav 
+  padding: 20px  
+  font-size: 12px
+
+// Search input
+.search                  
+  margin-top: 10px
+  margin-left: 20px
+  display: inline-block
+
+  input
+    height: 32px
+    width: 344px
+    border: 1px solid #c9c9c9
+    +border-radius(5px 0px 5px 5px)
+    font-size: 10px
+    color: #d3d4d6
+    padding-left: 5px
+    background-image: url('../images/icon-search.png')
+    background-repeat: no-repeat
+    background-position: right 10px
+
+#av
+  display: block
+  float: right
+  margin-top: 100px
+
+
+// 07 - Main section
+
+.main
+  +bg-gradient-t2b($background-color, #fff)
+  width: 100%
+
+  .container
+    +bg-gradient-t2b(rgba(255,255,255,0.45), rgba(255,255,255,0.0))
+    +border-radius(0px 10px 0px 0px)
+    position: relative
+
+  .products   
+    position: relative 
+    margin-top: -112px
+    padding-left: 35px
+    z-index: 2
+
+  .title
+    h2
+      color: $page-title
+      font-size: 20px
+      margin-bottom: 0
+
+    p
+      color: $page-title-p
+      font-size: 12px
+      font-family: $font-arial 
+
+  // Articles
+  article
+    width: 258px
+    margin: 12px
+    padding: 10px
+    display: inline-block  
+    +border-radius(0px 10px 10px 10px)
+    background-color: #fff
+    box-shadow: 2px 3px 2px $main-nav
+    height: 291px
+
+    h1
+      margin: 0
+
+      a
+        font-size: 14px
+        color: $article
+        margin: 0
+
+      a:hover
+        color: $page-title
+        text-decoration: underline
+
+    p
+      font-size: 11px
+      font-family: $font-arial
+      color: $article
+
+    img
+      float: left
+      margin: 5px 10px 10px 0 
+
+    ul
+      width: 100%
+      padding: 0
+    
+      li
+        display: inline-block
+        background-color: #f2f2f2
+        width: 100%
+        margin-bottom: 2px    
+
+        a
+          color: $article
+          font-size: 10px
+          font-family: $font-arial
+          padding: 4px
+
+          i
+            float: right
+            padding: 3px
+
+      li:hover
+        background-color: $nav-dropdown-color        
+
+
+p.copy
+  font-family: $font-arial
+  font-size: 10px
+  color: $page-title-p
+  margin-bottom: 80px
+  padding-left: 18px
+
+  img
+    margin-right: 6px
+    position: relative
+    float: left
+ 
+
+//  08 - Footer
+
+footer
+  +bg-gradient-t2b($footer-color-top, $footer-color-bottom)
+  height: 225px
+
+  div
+    float: left
+    margin-top: 10px
+    display: inline
+
+  a
+    color: $footer-link
+    font-size: 9px
+    font-family: $font-arial
+
+  a:hover
+    color: $nav-color  
+    text-decoration: underline
+
+  ul
+    margin-right: 30px  
+
+  li
+    display: block 
+
+.footer-menu li:first-child
+  font-size: 10px
+  font-weight: bold
+  font-family: $font-arial   
+  margin-bottom: 10px
+
+.footer-nav
+  
+  a:hover
+    text-decoration: none    
+
+.copyright
+  width: 100%
+  background-color: $footer-bottom-color
+
+  p
+    color: #fff
+    font-size: 9px
+    padding: 4px 40px
+
+  p a  
+    color: #fff
+    font-size: 9px
+    margin-left: 40px
+
+// Slide out
+
+.slide-out-div
+  padding: 40px
+  width: 770px
+  height: 160px
+  background: $nav-color
+  +border-radius(0px 0px 0px 10px)
+  color: #fff
+  z-index: 9
+
+  .plug
+    width: 35%
+    height: 100%
+    border-right: 1px solid #585858
+
+  .info
+    width: 50%
+    padding-left: 40px
+
+  div
+    float: left
+    display: inline
+
+    h3
+      color: $main-nav-hover
+      font-size: 20px 
+      font-family: $font-gotham_rl
+      margin-top: 0
+
+    h4   
+      color: $main-nav-hover
+      font-size: 12px 
+      font-family: $font-arial
+      margin-top: 30px
+
+    p
+      font-family: $font-arial 
+      font-size: 12px
+      line-height: 20px
+
+    .button_y
+      background-color: $main-nav-hover
+      color: $main-nav-dropdown
+      font-size: 11px
+      font-family: $font-arial
+      padding: 10px
+      +border-radius(8px 8px 0px 8px)
+
+      i
+        position: relative
+        top: 3px
+        margin-left: 10px
+
+    .button
+      color: $main-nav-hover
+      font-size: 11px
+      font-family: $font-arial
+      background-color: #585858
+      padding: 10px
+      +border-radius(8px 8px 0px 8px)
+
+      i
+        position: relative
+        top: 3px
+        margin-left: 10px
+
+
+// News
+
+#news
+  background-color: $news
+  height: 34px
+  transition: height 1s
+  -webkit-transition: height 1s
+  -moz-transition: height 1s
+  -ms-transition: height 1s
+  -o-transition: height 1s
+
+  ul, p
+    display: inline-block
+    margin: 0
+
+  p
+    font-size: 16px
+    color: #5c5c5c
+    font-style: italic 
+    padding-left: 14px 
+    margin-right: 10px
+    position: relative
+    top: -104px
+
+  ul
+    list-style: none
+    padding-left: 0
+    width: 100%
+
+    li
+      padding: 8px 15px
+
+    a
+      color: $font-color     
+      font-size: 12px
+      font-family: $font-arial
+      margin: 5px 0
+
+  #newslist
+    display: inline-block
+    border-right: 1px solid $main-nav
+    border-left: 1px solid $main-nav
+    width: 87%
+
+  #news_plus
+    position: relative
+    top: -95px  
+
+.news_colapse
+  height: 138px !important
+  
+.highlighted
+  background-color: #f8f7c0  
+
+// 09 - Responsive
+
+$break-small: 480px
+$break-middle: 550px
+$break-large: 950px
+
+
+@media screen and (max-width: $break-large)
+  .container, .products
+    width: 840px
+
+  nav
+    width: 100%
+    margin-left: 0
+    margin-top: 20px    
+
+  .products
+    margin-top: 0 !important
+
+  .main
+    article
+      width: 228px  
+
+  .top-nav
+    display: flex
+    float: left
+
+    ul
+      padding-left: 0      
+
+  .article_p p
+    float: left 
+
+  .slide-out-div
+    display: none
+
+  footer
+    height: 286px
+
+  .footer-menu
+    float: left 
+    width: 33% 
+
+  .footer-nav
+    width: 100%  
+    margin: 20px 0
+
+    ul
+      margin: 0 auto
+      padding: 0
+
+  #footer
+    width: 100%
+
+  .copyright
+    p
+      text-align: center
+      margin: 0 auto
+
+      a
+        margin-left: 0 
+
+  #news #newslist
+    width: 710px      
+  
+@media screen and (max-width: $break-middle)
+
+  .footer-menu
+    ul
+      margin: 15px
+      padding: 0
+
+  footer
+    height: 332px !important      
+
+@media screen and (max-width: 1150px)
+
+  #av
+    display: none
+
+@media screen and (max-width: 850px) 
+
+  .container, .products
+    width: 550px
+
+  .products
+    padding-left: 0 !important  
+
+  .logo
+    float: none
+
+  .top-nav
+    float: left
+    display: block
+
+    ul, .search
+      float: none   
+      display: block  
+
+    .search
+      margin-left: 0
+      margin-top: 55px  
+  nav
+    ul
+      display: none
+
+    li
+      width: 100%
+
+    li:hover ul
+      display: none
+
+  .showul
+    display: block
+
+  nav p
+    display: none
+
+  .toggle
+    display: block !important
+
+  #newslist
+    width: 550px !important
+
+  #news_plus
+    top: -184px !important
+    left: 560px 
+
+  #news
+    height: 32px
+
+  #news p
+    display: none   
+
+  footer
+    height: 346px
+
+@media screen and (max-width: 620px)
+  .container, .products
+    width: 470px 
+  
+  #newslist
+    width: 450px !important
+  
+  #news_plus
+    left: 460px
+
+  .main
+    article
+      width: 422px   
+
+  p.copy
+    padding: 0
+    text-align: center  
+
+  footer
+    height: 386px !important
+
+  .footer-menu
+    ul
+      padding: 10px  
+
+@media screen and (max-width: $break-small)
+
+  .container, .products
+    width: 320px
+
+  #newslist
+    width: 290px !important
+
+  #news_plus
+    top: -235px !important
+    left: 0px
+
+  .search input
+    width: 280px
+
+  .top-nav li, .footer-nav li
+    margin-right: 5px 
+
+  .main
+    article
+      width: 274px  
+  
+  footer
+    height: 722px !important   
+
+  .footer-menu
+    float: left 
+    width: 100%  
